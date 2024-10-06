@@ -37,6 +37,7 @@ import { openUAVDetailsDialog } from '~/features/uavs/details';
 import { createUAVOperationThunks } from '~/utils/messaging';
 import { getPreferredCommunicationChannelIndex } from '~/features/mission/selectors';
 import { getUAVIdList } from '~/features/uavs/selectors';
+import { showNotification } from '~/features/snackbar/actions';
 
 /**
  * Main toolbar for controlling the UAVs.
@@ -50,6 +51,7 @@ const UAVOperationsButtonGroup = ({
   requestRemovalOfUAVsByIds,
   requestRemovalOfUAVsMarkedAsGone,
   selectedUAVIds,
+  showNotification,
   size,
   startSeparator,
   t,
@@ -307,6 +309,7 @@ UAVOperationsButtonGroup.propTypes = {
   requestRemovalOfUAVsMarkedAsGone: PropTypes.func,
   selectedUAVIds: PropTypes.arrayOf(PropTypes.string),
   hideSeparators: PropTypes.bool,
+  showNotification: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium']),
   startSeparator: PropTypes.bool,
   t: PropTypes.func,
@@ -322,6 +325,7 @@ export default connect(
         openUAVDetailsDialog,
         requestRemovalOfUAVsMarkedAsGone,
         requestRemovalOfUAVsByIds,
+        showNotification,
       },
       dispatch
     ),
