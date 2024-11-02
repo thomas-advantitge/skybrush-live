@@ -501,7 +501,7 @@
     "layer-list": "Couches",
     "lcd-clock-panel": "Horloge",
     "light-control": "Contrôle des lumières",
-    "log-panel": "Journal d'évènements",
+    "event-log-panel": "Journal d'évènements",
     "map": "Carte",
     "mission-editor": "Editeur de mission",
     "saved-location-list": "Emplacments",

@@ -122,7 +122,7 @@ export const componentRegistry = {
     label: 'Clocks',
     detachable: true,
   },
-  'log-panel': {
+  'event-log-panel': {
     component: views.LogPanel,
     label: 'Event log',
     detachable: true,
@@ -171,6 +171,11 @@ export const componentRegistry = {
   'uav-list': {
     component: injectFlockFromContext(views.UAVList),
     label: 'UAVs',
+    detachable: true,
+  },
+  'uav-logs': {
+    component: views.UAVLogsPanel,
+    label: 'UAV logs',
     detachable: true,
   },
 };
