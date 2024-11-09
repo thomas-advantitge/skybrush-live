@@ -138,11 +138,11 @@ const UAVLogListItem = ({ id, kind, size, timestamp, uavId, triggerDownload }) =
       </Typography>
     );
 
-  const disabled = downloadState?.status === LogDownloadStatus.LOADING;
-  const onClick = log ? save : download;
-
+  const isLoading = downloadState?.status === LogDownloadStatus.LOADING;
+  const onClick = isLoading ? undefined : log ? save : download;
+  
   return (
-    <ListItem button disabled={disabled} onClick={onClick}>
+    <ListItem button onClick={onClick}>
       <StatusLight
         status={
           {
@@ -162,7 +162,7 @@ const UAVLogListItem = ({ id, kind, size, timestamp, uavId, triggerDownload }) =
         secondary={secondaryComponent}
       />
       <ListItemSecondaryAction>
-        <IconButton edge='end' disabled={disabled} onClick={onClick}>
+        <IconButton edge='end' disabled={isLoading} onClick={onClick}>
           {downloadState?.status === LogDownloadStatus.SUCCESS ? (
             <Save />
           ) : (
