@@ -19,6 +19,7 @@ import MissionOverviewPanel from './mission-editor';
 import ShowControlPanel from './show-control';
 import UAVDetailsPanel from './uav-details';
 import UAVList from './uavs';
+import UAVLogsPanel from './uav-logs';
 import ThreeDTopLevelView from './three-d';
 
 /* MapView not included as it is loaded lazily */
@@ -40,6 +41,7 @@ const views = {
   ShowControlPanel,
   UAVDetailsPanel,
   UAVList,
+  UAVLogsPanel,
   ThreeDTopLevelView,
 };
 

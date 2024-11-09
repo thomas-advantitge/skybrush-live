@@ -502,7 +502,7 @@
     "layer-list": "层",
     "lcd-clock-panel": "时钟",
     "light-control": "灯光控制",
-    "log-panel": "事件日志",
+    "event-log-panel": "事件日志",
     "map": "地图",
     "mission-editor": "任务编辑器",
     "saved-location-list": "地点",

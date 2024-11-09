@@ -668,6 +668,7 @@
   "view": {
     "beacon-list": "Beacons",
     "dock-list": "Docks",
+    "event-log-panel": "Event log",
     "feature-list": "Features",
     "field-notes": "Field notes",
     "layer-list": "Layers",
@@ -680,7 +681,8 @@
     "show-control": "Show control",
     "three-d-view": "3D View",
     "uav-details": "UAV details",
-    "uav-list": "UAVs"
+    "uav-list": "UAVs",
+    "uav-logs": "UAV logs"
   },
   "weatherMiniList": {
     "compassDeclination": "Compass declination",

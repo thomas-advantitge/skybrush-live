@@ -111,6 +111,12 @@ const Sidebar = ({
           label={t('view.uav-list')}
           component='uav-list'
         />
+        <Module
+          id='log'
+          icon={<FormatListBulleted />}
+          label={t('view.uav-logs')}
+          component='uav-logs'
+        />
         {hasFeature('beacons') && (
           <Module
             id='beacons'
@@ -186,8 +192,8 @@ const Sidebar = ({
           id='log'
           badge={<LogStatusBadge />}
           icon={<FormatListBulleted />}
-          label={t('view.log-panel')}
-          component='log-panel'
+          label={t('view.event-log-panel')}
+          component='event-log-panel'
         />
       </ModuleTray>
     </div>

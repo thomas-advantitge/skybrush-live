@@ -15,8 +15,7 @@ import StatusLight from '@skybrush/mui-components/lib/StatusLight';
 import Colors from '~/components/colors';
 import { errorToString } from '~/error-handling';
 import { useMessageHub } from '~/hooks';
-
-import ListItemProgressBar from './ListItemProgressBar';
+import ListItemProgressBar from '~/components/ListItemProgressBar';
 
 const tests = [
   {
