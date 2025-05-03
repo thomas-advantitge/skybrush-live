@@ -111,6 +111,12 @@ const Sidebar = ({
           component='uav-list'
         />
         <Module
+          id='uavStatuses'
+          icon={<ConnectingAirports />}
+          label={t('view.uav-statuses')}
+          component='uav-statuses'
+        />
+        <Module
           id='collectiveRTH'
           icon={<HomeCircleOutlined />}
           label={t('view.collective-rth')}
