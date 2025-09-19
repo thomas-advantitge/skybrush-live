@@ -21,6 +21,7 @@ import ThreeDTopLevelView from './three-d';
 import UAVDetailsPanel from './uav-details';
 import UAVList from './uavs';
 import UAVStatusPanel from './uavs/UAVStatusPanel';
+import RTKStatusPanel from '../features/rtk/RTKStatusPanel';
 
 /* MapView not included as it is loaded lazily */
 
@@ -43,6 +44,7 @@ const views = {
   UAVList,
   ThreeDTopLevelView,
   UAVStatusPanel,
+  RTKStatusPanel,
 };
 
 export default views;
