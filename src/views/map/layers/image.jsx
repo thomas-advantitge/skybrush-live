@@ -84,11 +84,11 @@ const ImageLayerSettingsPresentation = ({
     >
       {({ handleSubmit }) => (
         <form id='ImageTransformEditor' onSubmit={handleSubmit}>
-          <FormSpy
-            subscription={{ active: true, values: true }}
-            component={AutoSaveOnBlur}
-            save={_forceFormSubmission}
-          />
+          <FormSpy subscription={{ active: true, values: true }}>
+            {({ active }) => (
+              <AutoSaveOnBlur active={active} save={_forceFormSubmission} />
+            )}
+          </FormSpy>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             {parameters.image.name ? (
               <img
