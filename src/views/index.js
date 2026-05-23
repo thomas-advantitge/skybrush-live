@@ -20,6 +20,7 @@ import ShowControlPanel from './show-control';
 import ThreeDTopLevelView from './three-d';
 import UAVDetailsPanel from './uav-details';
 import UAVList from './uavs';
+import UAVLivePanel from './uav-live';
 import UAVStatusPanel from './uavs/UAVStatusPanel';
 import RTKStatusPanel from '../features/rtk/RTKStatusPanel';
 
@@ -40,9 +41,10 @@ const views = {
   MissionOverviewPanel,
   SavedLocationList,
   ShowControlPanel,
+  ThreeDTopLevelView,
   UAVDetailsPanel,
   UAVList,
-  ThreeDTopLevelView,
+  UAVLivePanel,
   UAVStatusPanel,
   RTKStatusPanel,
 };

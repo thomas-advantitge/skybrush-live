@@ -158,6 +158,11 @@ export const componentRegistry = {
     detachable: true,
     feature: 'showControl',
   },
+  'uav-live': {
+    component: views.UAVLivePanel,
+    label: 'UAV live charts',
+    detachable: true,
+  },
   'three-d-view': {
     component: views.ThreeDTopLevelView,
     label: '3D View',
