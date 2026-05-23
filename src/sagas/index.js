@@ -14,6 +14,7 @@ import serversSaga from '~/features/servers/saga';
 import showSaga from '~/features/show/saga';
 import sessionSaga from '~/features/session/saga';
 import threeDViewSaga from '~/features/three-d/saga';
+import uavLiveSamplerSaga from '~/features/uav-live/saga';
 import uavManagementSaga from '~/features/uavs/saga';
 import uploadSaga from '~/features/upload/saga';
 import weatherSaga from '~/features/weather/saga';
@@ -34,6 +35,7 @@ export default function* rootSaga() {
     serversSaga(),
     showSaga(),
     threeDViewSaga(),
+    uavLiveSamplerSaga(),
     uavManagementSaga(flock),
     uploadSaga(),
     weatherSaga(),

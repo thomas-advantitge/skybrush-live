@@ -1331,6 +1331,12 @@
     "8": "Motors are running while on ground",
     "9": "Drone is in sleep mode"
   },
+  "uavLivePanel": {
+    "gpsFix": "GPS fix",
+    "noData": "No samples yet — waiting for drone updates.",
+    "rssi": "RSSI",
+    "voltage": "Battery voltage"
+  },
   "uavOperationConfirmationStyle": {
     "always": "Always ask for confirmation",
     "never": "Never ask for confirmation",
@@ -1404,7 +1410,8 @@
     "show-control": "Show control",
     "three-d-view": "3D View",
     "uav-details": "UAV details",
-    "uav-list": "UAVs"
+    "uav-list": "UAVs",
+    "uav-live": "UAV live charts"
   },
   "weatherMiniList": {
     "compassDeclination": "Compass declination",

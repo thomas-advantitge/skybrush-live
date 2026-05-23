@@ -20,6 +20,7 @@ import ShowControlPanel from './show-control';
 import ThreeDTopLevelView from './three-d';
 import UAVDetailsPanel from './uav-details';
 import UAVList from './uavs';
+import UAVLivePanel from './uav-live';
 
 /* MapView not included as it is loaded lazily */
 
@@ -38,9 +39,10 @@ const views = {
   MissionOverviewPanel,
   SavedLocationList,
   ShowControlPanel,
+  ThreeDTopLevelView,
   UAVDetailsPanel,
   UAVList,
-  ThreeDTopLevelView,
+  UAVLivePanel,
 };
 
 export default views;

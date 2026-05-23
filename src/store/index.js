@@ -64,6 +64,7 @@ const persistConfig = {
     'servers',
     'session',
     'snackbar',
+    'uavLive',
     'uavs',
     'weather',
   ],
