@@ -235,8 +235,17 @@ type MetricConfig = {
 const METRIC_CONFIGS: MetricConfig[] = [
   {
     id: 'rssi',
-    seriesKeys: ['rssi', 'rssiSecondary'],
+    seriesKeys: ['rssi'],
     titleKey: 'rssi',
+    unitLabel: (v) => `${v}`,
+    yMin: 0,
+    yMax: 100,
+    divergenceThreshold: 15,
+  },
+  {
+    id: 'rssiSecondary',
+    seriesKeys: ['rssiSecondary'],
+    titleKey: 'rssiSecondary',
     unitLabel: (v) => `${v}`,
     yMin: 0,
     yMax: 100,
@@ -376,13 +385,15 @@ const UAVLivePanel = () => {
   });
 
   // Per-metric datasets are recomputed only when Redux-owned inputs change —
-  // not on every 1s `useUpdate` tick used to slide the x-axis.
+  // not on every 1s `useUpdate` tick used to slide the x-axis. Metrics with
+  // zero datasets across the whole fleet are filtered out (e.g. the secondary
+  // RSSI chart is hidden when no drone reports rssi[1]).
   const datasetsByMetric = useMemo(
     () =>
-      METRIC_CONFIGS.map((cfg) => {
+      METRIC_CONFIGS.flatMap((cfg) => {
         const severity = computeSeverity(cfg, uavIds, byUavId, selectedSet);
         const datasets = buildDatasets(cfg, byUavId, uavIds, severity);
-        return { cfg, datasets };
+        return datasets.length > 0 ? [{ cfg, datasets }] : [];
       }),
     [uavIds, byUavId, selectedSet]
   );

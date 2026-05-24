@@ -1406,12 +1406,14 @@
     "log-panel": "Event log",
     "map": "Map",
     "mission-editor": "Mission editor",
+    "rtk-statuses": "RTK statuses",
     "saved-location-list": "Locations",
     "show-control": "Show control",
     "three-d-view": "3D View",
     "uav-details": "UAV details",
     "uav-list": "UAVs",
-    "uav-live": "UAV live charts"
+    "uav-live": "UAV live charts",
+    "uav-statuses": "UAV statuses"
   },
   "weatherMiniList": {
     "compassDeclination": "Compass declination",
