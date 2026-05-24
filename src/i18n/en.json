@@ -1335,6 +1335,7 @@
     "gpsFix": "GPS fix",
     "noData": "No samples yet — waiting for drone updates.",
     "rssi": "RSSI",
+    "rssiSecondary": "RSSI (secondary)",
     "voltage": "Battery voltage"
   },
   "uavOperationConfirmationStyle": {

@@ -88,6 +88,8 @@ const initialState: SettingsSliceState = {
     maxUploadConcurrency: 8,
     minIndoorTakeoffSpacing: 200,
     minOutdoorTakeoffSpacing: 400,
+    liveChartWindowSeconds: 120,
+    liveChartKeepAllData: false,
   },
 
   apiKeys: {},

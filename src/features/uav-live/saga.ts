@@ -11,6 +11,7 @@ import { type RootState } from '~/store/reducers';
 import { getUAVById, getUAVIdList } from '../uavs/selectors';
 
 import { SAMPLE_INTERVAL_MS } from './constants';
+import { getUAVLiveTrimPolicy } from './selectors';
 import { samplesRecorded, type UAVLiveSnapshot } from './slice';
 
 export default function* uavLiveSamplerSaga(): Generator {
@@ -62,7 +63,14 @@ export default function* uavLiveSamplerSaga(): Generator {
     }
 
     if (anySamples) {
-      yield put(samplesRecorded({ now: Date.now(), samples }));
+      const policy = getUAVLiveTrimPolicy(state);
+      const now = Date.now();
+      const cutoff = policy.keepAllData
+        ? Number.NEGATIVE_INFINITY
+        : now - policy.windowMs;
+      yield put(
+        samplesRecorded({ now, cutoff, cap: policy.cap, samples })
+      );
     }
   }
 }

@@ -1,8 +1,10 @@
-/** How far back the rolling buffer keeps samples (ms). */
-export const WINDOW_MS = 5 * 60 * 1000;
-
 /** Interval between sampler ticks (ms). One sample per metric per UAV per tick. */
 export const SAMPLE_INTERVAL_MS = 1000;
 
-/** Hard cap on points per series, regardless of window. */
-export const MAX_POINTS_PER_SERIES = Math.ceil(WINDOW_MS / SAMPLE_INTERVAL_MS);
+/**
+ * Hard ceiling on points per series, regardless of the configured window. Acts
+ * as a memory safety net when `liveChartKeepAllData` is enabled or when the
+ * window is set very long. At 1 sample/s this is ~2 hours of history per
+ * (drone × metric).
+ */
+export const MAX_POINTS_HARD_CEILING = 7200;

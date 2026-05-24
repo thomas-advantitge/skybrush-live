@@ -214,6 +214,19 @@ export type SettingsState = {
      * Minimum distance allowed between two UAVs for outdoor shows, in meters.
      */
     minOutdoorTakeoffSpacing?: number;
+
+    /**
+     * How many seconds of telemetry the live charts panel keeps in its
+     * rolling buffer. Ignored when {@link liveChartKeepAllData} is `true`.
+     */
+    liveChartWindowSeconds: number;
+
+    /**
+     * When `true`, the live charts panel keeps every sample it sees (capped
+     * by an internal hard ceiling). When `false`, samples older than
+     * {@link liveChartWindowSeconds} are trimmed.
+     */
+    liveChartKeepAllData: boolean;
   };
 
   apiKeys: Record<string, string>;
