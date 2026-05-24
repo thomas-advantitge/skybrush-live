@@ -27,6 +27,14 @@ const migrations = {
       };
     }
   }),
+  4: createNextState((state) => {
+    if (typeof state.settings.uavs.liveChartWindowSeconds !== 'number') {
+      state.settings.uavs.liveChartWindowSeconds = 120;
+    }
+    if (typeof state.settings.uavs.liveChartKeepAllData !== 'boolean') {
+      state.settings.uavs.liveChartKeepAllData = false;
+    }
+  }),
 };
 
 export default createMigrate(migrations);

@@ -20,14 +20,14 @@ import { BackgroundHint } from '@skybrush/mui-components';
 
 import { setSelectedUAVIds } from '~/features/uavs/actions';
 import { getSelectedUAVIds } from '~/features/uavs/selectors';
+import { tt, type PreparedI18nKey } from '~/i18n';
 import { abbreviateGPSFixType, GPSFixType } from '~/model/enums';
 import { useAppDispatch } from '~/store/hooks';
 
-import { WINDOW_MS } from '~/features/uav-live/constants';
 import {
   getKnownUAVLiveIds,
   getUAVLiveByUavId,
-  getUAVLiveWindowMs,
+  getUAVLiveTrimPolicy,
 } from '~/features/uav-live/selectors';
 import type {
   UAVLiveMetric,
@@ -35,6 +35,7 @@ import type {
 } from '~/features/uav-live/slice';
 
 import LineChart from './LineChart';
+
 
 const OUTLIER_COUNT = 5;
 
@@ -221,7 +222,11 @@ type MetricConfig = {
   id: string;
   /** Series in this chart. Multiple → one dataset per (drone, series); secondaries are dashed. */
   seriesKeys: UAVLiveMetric[];
-  titleKey: string;
+  /**
+   * Chart title — a `tt(...)` reference so the i18next-extract Babel plugin
+   * keeps the underlying key in en.json across rebuilds.
+   */
+  title: PreparedI18nKey;
   unitLabel?: (v: number) => string;
   yMin?: number;
   yMax?: number;
@@ -236,7 +241,7 @@ const METRIC_CONFIGS: MetricConfig[] = [
   {
     id: 'rssi',
     seriesKeys: ['rssi'],
-    titleKey: 'rssi',
+    title: tt('uavLivePanel.rssi'),
     unitLabel: (v) => `${v}`,
     yMin: 0,
     yMax: 100,
@@ -245,7 +250,7 @@ const METRIC_CONFIGS: MetricConfig[] = [
   {
     id: 'rssiSecondary',
     seriesKeys: ['rssiSecondary'],
-    titleKey: 'rssiSecondary',
+    title: tt('uavLivePanel.rssiSecondary'),
     unitLabel: (v) => `${v}`,
     yMin: 0,
     yMax: 100,
@@ -254,14 +259,14 @@ const METRIC_CONFIGS: MetricConfig[] = [
   {
     id: 'voltage',
     seriesKeys: ['voltage'],
-    titleKey: 'voltage',
+    title: tt('uavLivePanel.voltage'),
     unitLabel: (v) => `${v.toFixed(2)} V`,
     divergenceThreshold: 0.3,
   },
   {
     id: 'gpsFixType',
     seriesKeys: ['gpsFixType'],
-    titleKey: 'gpsFix',
+    title: tt('uavLivePanel.gpsFix'),
     unitLabel: (v) =>
       abbreviateGPSFixType((v as GPSFixType) ?? GPSFixType.UNKNOWN),
     yMin: GPS_FIX_TYPE_ORDER[0],
@@ -276,9 +281,7 @@ const METRIC_CONFIGS: MetricConfig[] = [
 ];
 
 const UAVLivePanel = () => {
-  const { t } = useTranslation(undefined, {
-    keyPrefix: 'uavLivePanel',
-  });
+  const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const update = useUpdate();
@@ -286,14 +289,29 @@ const UAVLivePanel = () => {
   const byUavId = useSelector(getUAVLiveByUavId);
   const uavIds = useSelector(getKnownUAVLiveIds);
   const selectedUavIds = useSelector(getSelectedUAVIds);
-  const windowMs = useSelector(getUAVLiveWindowMs) || WINDOW_MS;
+  const { windowMs, keepAllData } = useSelector(getUAVLiveTrimPolicy);
 
   useHarmonicIntervalFn(update, 1000);
 
   const selectedSet = useMemo(() => new Set(selectedUavIds), [selectedUavIds]);
 
   const now = Date.now();
-  const xMin = now - windowMs;
+  // When the user opts to keep all data, anchor the left edge of the chart
+  // to the oldest sample we hold (across any drone × any metric) instead of
+  // a fixed window-back-from-now.
+  let xMin = now - windowMs;
+  if (keepAllData) {
+    let earliest = now;
+    for (const id of uavIds) {
+      const s = byUavId[id];
+      if (!s) continue;
+      const candidates = [s.rssi[0], s.rssiSecondary[0], s.voltage[0], s.gpsFixType[0]];
+      for (const p of candidates) {
+        if (p && p.x < earliest) earliest = p.x;
+      }
+    }
+    xMin = Math.min(earliest, now - 1000);
+  }
   const isDark = isThemeDark(theme);
 
   const axisColor = isDark
@@ -399,7 +417,7 @@ const UAVLivePanel = () => {
   );
 
   if (!hasAnyData) {
-    return <BackgroundHint text={t('noData')} />;
+    return <BackgroundHint text={t('uavLivePanel.noData')} />;
   }
 
   return (
@@ -423,7 +441,7 @@ const UAVLivePanel = () => {
               variant='caption'
               sx={{ color: axisColor, fontFamily: defaultFont, pl: 1 }}
             >
-              {t(cfg.titleKey)}
+              {cfg.title(t)}
             </Typography>
             <Box sx={{ flex: 1, minHeight: 0 }}>
               <LineChart

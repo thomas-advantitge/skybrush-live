@@ -71,6 +71,8 @@ const UAVsTabPresentation = ({
   forgetThreshold,
   fullChargeVoltage,
   goneThreshold,
+  liveChartKeepAllData,
+  liveChartWindowSeconds,
   lowVoltageThreshold,
   maxUploadConcurrency,
   minIndoorTakeoffSpacing,
@@ -312,6 +314,48 @@ const UAVsTabPresentation = ({
           {t('settings.uavs.missionSetupDescription')}
         </Typography>
       </Box>
+
+      <Box sx={{ my: 2 }}>
+        <Header>{t('settings.uavs.liveCharts')}</Header>
+
+        <FormControl className={styles.gridFormControl}>
+          <FormControlLabel
+            label={t('settings.uavs.liveChartWindow')}
+            control={
+              <Checkbox
+                checked={!liveChartKeepAllData}
+                className={styles.hidden}
+              />
+            }
+          />
+          <SimpleDurationField
+            name='liveChartWindowSeconds'
+            min={5}
+            max={7200}
+            value={liveChartWindowSeconds}
+            disabled={Boolean(liveChartKeepAllData)}
+            variant='standard'
+            onChange={onIntegerFieldUpdated}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormControlLabel
+            label={t('settings.uavs.liveChartKeepAllData')}
+            control={
+              <Checkbox
+                checked={Boolean(liveChartKeepAllData)}
+                name='liveChartKeepAllData'
+                onChange={onCheckboxToggled}
+              />
+            }
+          />
+        </FormControl>
+
+        <Typography variant='body2' color='textSecondary'>
+          {t('settings.uavs.liveChartKeepAllDataDescription')}
+        </Typography>
+      </Box>
     </>
   );
 };
@@ -323,6 +367,8 @@ UAVsTabPresentation.propTypes = {
   forgetThreshold: PropTypes.number,
   fullChargeVoltage: PropTypes.number,
   goneThreshold: PropTypes.number,
+  liveChartKeepAllData: PropTypes.bool,
+  liveChartWindowSeconds: PropTypes.number,
   lowVoltageThreshold: PropTypes.number,
   maxUploadConcurrency: PropTypes.number,
   minIndoorTakeoffSpacing: PropTypes.number,
