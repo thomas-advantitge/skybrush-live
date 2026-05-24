@@ -201,6 +201,12 @@
  * t("rtkMessageType.rtcm3/1127")
  * t("rtkMessageType.rtcm3/1230")
  *
+ * UAV live chart metric titles
+ * t("uavLivePanel.rssi")
+ * t("uavLivePanel.rssiSecondary")
+ * t("uavLivePanel.voltage")
+ * t("uavLivePanel.gpsFix")
+ *
  * UAV error codes
  * t("uavErrorCode.0")
  * t("uavErrorCode.1")
